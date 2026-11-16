@@ -359,6 +359,8 @@ services:
     # that breaks the RunTracker CAS lease, and they reject the Redis-style
     # maxmemory/maxmemory-policy settings.
     image: apache/kvrocks:2.16.0
+    mem_limit: 512m
+    memswap_limit: 512m
     # Kvrocks' config file does not expand ${ENV} and its CLI rejects
     # `--requirepass` as a flag, so the entrypoint renders the config (including
     # the password from REDIS_PASSWORD) at startup. `user: "0"` lets it write the

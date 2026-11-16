@@ -33,6 +33,12 @@ mkdir -p "$KVROCKS_DIR"
   echo "port 6379"
   echo "dir $KVROCKS_DIR"
   printf 'requirepass %s\n' "$REDIS_PASSWORD"
+  printf '%s\n' \
+    "rocksdb.block_cache_size 128" \
+    "rocksdb.write_buffer_size 16" \
+    "rocksdb.max_write_buffer_number 2" \
+    "rocksdb.max_background_jobs 2" \
+    "rocksdb.max_subcompactions 1"
 } > "$KVROCKS_DIR/kvrocks.conf"
 
 exec kvrocks -c "$KVROCKS_DIR/kvrocks.conf" --dir "$KVROCKS_DIR"
